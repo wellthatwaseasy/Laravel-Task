@@ -7,21 +7,21 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\TaskController;
+use App\Models\Task;
 
 ////////////////////////////////////////////////////////////////////////
 //
 
 Route::get('/home', function () {return view('home');})->name('home');
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-Route::get('/tasks', function () {return view('tasks.index');})->name('tasks');
+//Tasks
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
 
 //Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::post('/posts', [PostController::class, 'store']);
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-
 Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
 Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes');
 
