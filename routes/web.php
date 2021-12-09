@@ -1,23 +1,24 @@
 <?php
 
+use App\Models\Task;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\TaskController;
-use App\Models\Task;
 
 ////////////////////////////////////////////////////////////////////////
 //
 
 Route::get('/home', function () {return view('home');})->name('home');
+Route::get('/', function () {return view('home');})->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 //Tasks
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
-Route::post('/tasks/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::resource('tasks', TaskController::class);
 
 //Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts');

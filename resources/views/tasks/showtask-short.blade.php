@@ -1,11 +1,11 @@
 <div>
     @if ($task->ownedBy(auth()->user()))
         <div class="bg-blue-100 text-xl font-bold rounded-t-xl p-2" title="{{$task->description}} ">
-            <form action="{{route('tasks.edit') }}" method="post" class="mr-4">
+            <a href="{{ url( '/tasks/' . $task->id . '/edit')}}" class="text-green-500">{{$task->name}}</a>
+            {{-- <form action=""class="mr-4">
                 @csrf
-                <input type="hidden" name="id" value="{{$task->id}}">
-                <button type="submit" class="text-green-500">{{$task->name}}</button>
-            </form>
+                <button type="submit"</button>
+            </form> --}}
         </div>
     @else
         <p class="bg-blue-100 text-xl font-bold rounded-t-xl p-2" title="{{$task->description}} ">{{$task->name}}</p>

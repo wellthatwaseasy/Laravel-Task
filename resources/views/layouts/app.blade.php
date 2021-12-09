@@ -11,16 +11,16 @@
     <nav class="p-3 bg-white flex justify-between mb-6">
         <ul class="flex items-center">
             <li>
-                <a class="p-2" href=" {{ route('home') }} ">Home</a>
+                <a class="p-2" href=" {{ url('/home') }} ">Home</a>
             </li>
             <li>
-                <a class="p-2" href=" {{ route('dashboard') }} ">Dashboard</a>
+                <a class="p-2" href=" {{ url('/dashboard') }} ">Dashboard</a>
             </li>
             <li>
-                <a class="p-2" href=" {{ route('posts') }} ">Posts</a>
+                <a class="p-2" href=" {{ url('/posts') }} ">Posts</a>
             </li>
             <li>
-                <a class="p-2" href=" {{ route('tasks') }} ">Task</a>
+                <a class="p-2" href=" {{ url('/tasks') }} ">Task</a>
             </li>
         </ul>
         <ul class="flex items-center">
@@ -29,7 +29,7 @@
                     <a class="p-2" href="">{{auth()->user()->name}} </a>
                 </li>
                 <li>
-                    <form action="{{ route('logout') }}" method="post">
+                    <form action="{{ url('/logout') }}" method="post">
                         @csrf
                         <button type='submit' class="pl-3">Logout</button>
                     </form>
@@ -37,10 +37,10 @@
             @endauth
             @guest
                 <li>
-                    <a class="p-2" href="{{ route('login') }}">Login</a>
+                    <a class="p-2" href="{{ url('/login') }}">Login</a>
                 </li>
                 <li>
-                    <a class="p-2" href="{{ route('register') }} ">Register</a>
+                    <a class="p-2" href="{{ url('/register') }} ">Register</a>
                 </li>
             @endguest
         </ul>
