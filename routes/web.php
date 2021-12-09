@@ -17,6 +17,7 @@ Route::get('/home', function () {return view('home');})->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //Tasks
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
+Route::post('/tasks/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 
 //Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts');

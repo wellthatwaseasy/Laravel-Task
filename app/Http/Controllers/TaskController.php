@@ -13,4 +13,17 @@ class TaskController extends Controller
         $tasks = Task::all();
         return view('tasks.index',['tasks' => $tasks]);
     }
+
+    public function edit(Request $request)
+    {
+        //dd($request);
+        $task = Task::findOrFail($request->id);
+        return view('tasks.edit',['task' => $task]);
+        //dd($task);
+    }
+
+    public function create()
+    {
+        # code...
+    }
 }
