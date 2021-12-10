@@ -13,8 +13,8 @@ use App\Http\Controllers\Auth\RegisterController;
 ////////////////////////////////////////////////////////////////////////
 //
 
-Route::get('/home', function () {return view('home');})->name('home');
-Route::get('/', function () {return view('home');})->name('home');
+Route::get('/home', function () {return view('home');});
+Route::get('/', function () {return view('home');});
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 //Tasks

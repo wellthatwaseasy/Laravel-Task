@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
-    <title>Tasks</title>
+    <title>{{isset($pagetitle)?$pagetitle:'Tasks'}}</title>
 </head>
 <body class="bg-gray-200">
+    @if (session('status'))
+        <div>
+            <div class="text-green-900 bg-green-50 p-6 m-2 mb-0 border-4 border-green-500 rounded-lg absolute z-10"
+                style="opacity: 0.7;" onclick="parentNode.remove()" id="statusdiv">
+                {{ session('status') }}
+            </div>
+        </div>
+    @endif
     <nav class="p-3 bg-white flex justify-between mb-6">
         <ul class="flex items-center">
             <li>
                 <a class="p-2" href=" {{ url('/home') }} ">Home</a>
-            </li>
-            <li>
-                <a class="p-2" href=" {{ url('/dashboard') }} ">Dashboard</a>
             </li>
             <li>
                 <a class="p-2" href=" {{ url('/posts') }} ">Posts</a>

@@ -1,4 +1,3 @@
-
         @csrf
         <div class="mb-4">
             <label for="name" class="font-bold">Task Name</label>
@@ -17,17 +16,36 @@
             @enderror
         </div>
         <div class="mb-4">
-            <label for="user_id" class="font-bold">Assigned to</label>
-            <input type="text" name="user_id" id="user_id" placeholder="user_id"
-                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('user_id') border-red-500 @enderror" value="{{ $task->user_id }}">
+            <label for="user_id" class="font-bold">Assigned to </label>
+            <select name="user_id" id="user_id">
+                <option value="">----------</option>
+            @foreach($allusers as $user)
+                @if($user->id == $task->user_id)
+                    <option value="{{ $user->id }}" selected="true">{{ $user->name }}</option>
+                    @else
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endif
+            @endforeach
+            </select>
             @error('user_id')
                 <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>
         <div class="mb-4">
-            <label for="parent_id" class="font-bold">Assigned to</label>
-            <input type="text" name="parent_id" id="parent_id" placeholder="parent_id"
-                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('parent_id') border-red-500 @enderror" value="{{ $task->parent_id }}">
+            <label for="parent_id" class="font-bold">Parent Task </label>
+            <select name="parent_id" id="parent_id">
+                <option value="0">No Parent</option>
+            @foreach($alltasks as $parent)
+                @if($parent->id == $task->id)
+                    @continue
+                @endif
+                @if($parent->id == $task->parent_id)
+                    <option value="{{ $parent->id }}" selected="true">{{ $parent->name }}</option>
+                @else
+                    <option value="{{ $parent->id }}">{{ $parent->name }}</option>
+                @endif
+            @endforeach
+            </select>
             @error('parent_id')
                 <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
@@ -49,10 +67,20 @@
             @enderror
         </div>
         <div class="mb-4">
-            <label for="priority_id" class="font-bold">Priority Id</label>
-            <input type="text" name="priority_id" id="priority_id" placeholder="priority_id"
-                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('priority_id') border-red-500 @enderror" value="{{ $task->priority_id }}">
-            @error('priority_id')
+            <label for="priorities_id" class="font-bold">Priority </label>
+            <select name="priorities_id" id="priorities_id">
+                <option value="">----------</option>
+            @foreach($allpriorities as $priorities)
+                @if($priorities->id == $task->priorities_id)
+                    <option value="{{ $priorities->id }}" selected="true">{{ $priorities->name }}</option>
+                    @else
+                    <option value="{{ $priorities->id }}">{{ $priorities->name }}</option>
+                @endif
+            @endforeach
+            </select>
+            {{-- <input type="text" name="priorities_id" id="priorities_id" placeholder="priorities_id"
+                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('priorities_id') border-red-500 @enderror" value="{{ $task->priorities_id }}"> --}}
+            @error('priorities_id')
                 <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>

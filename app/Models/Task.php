@@ -13,7 +13,7 @@ class Task extends Model
         'name',
         'description',
         'user_id',
-        'priority_id',
+        'priorities_id',
         'parent_id',
         'start',
         'finish'
@@ -27,7 +27,16 @@ class Task extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function childs() {
-        return $this->hasMany('App\Task','parent_id','id') ;
+    public function priorities(){
+        return $this->belongsTo(Priority::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Task::class,'parent_id','id');
+    }
+    public function childs()
+    {
+        return $this->hasMany(Task::class,'parent_id','id');
     }
 }

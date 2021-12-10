@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Priority;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -11,30 +13,9 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
+        //dd($tasks->whereIn('parent_id', 3));
         return view('tasks.index',['tasks' => $tasks]);
     }
-
-    public function edit($id, Request $request)
-    {
-        //dd($id);
-        $task = Task::findOrFail($id);
-        return view('tasks.edit',['task' => $task]);
-        //dd($task);
-    }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function index()
-    // {
-    //   $tasks = Task::all();
-    //   $pagetitle = "Tasks";
-    //   return view('Tasks.index',compact('tasks','pagetitle'));
-    // }
-
     /**
      * Display the specified resource.
      *
@@ -44,11 +25,28 @@ class TaskController extends Controller
     public function show($id)
     {
         $task = Task::findOrFail($id);
-        $tasks = Task::all();
-        //dd($task->parents,$id);
+        //dd($task->childs);
         $pagetitle = $task->name;
-        return view('Tasks.show',compact('task','tasks','pagetitle'));
+        return view('tasks.show',compact('task','pagetitle'));
     }
+
+
+    /**
+     * Show the form for Editing a resource.
+     *
+     * @return \Illuminate\Http\Response
+     */    public function edit($id, Request $request)
+    {
+        //dd($id);
+        $task = Task::findOrFail($id);
+        $allusers = User::all();
+        $alltasks = Task::all();
+        $allpriorities = Priority::all();
+        $pagetitle = $task->name;
+        return view('tasks.edit',compact('task','allusers','alltasks','allpriorities','pagetitle'));
+        //dd($task);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -57,10 +55,12 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $allusers = User::all();
+        $task = new Task;
         $alltasks = Task::all();
-        $tasks = new Task;
+        $allpriorities = Priority::all();
         $pagetitle = "Create a new Task";
-        return view('Tasks.create',compact('tasks','teams','alltasks','pagetitle'));
+        return view('tasks.create',compact('task','allusers','alltasks','allpriorities','pagetitle'));
     }
 
 //    /**
@@ -89,21 +89,21 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        dd(request());
+        //dd(request());
         $valid = $request->validate([
-            'name' => 'required|max:190',
+            'name' => 'required|max:50',
             'description' => 'required',
-            'team_id' => 'required',
+            'user_id' => 'required',
             'start' => 'required',
             'finish' => 'required',
-            'parent' => 'not_in:foo,bar',
-            'sibling' => 'not_in:foo,bar',
+            'parent_id' => 'not_in:foo,bar',
+            'priorities_id' => 'not_in:foo,bar',
         ]);
         $valid['start'] = date("Y-m-d", strtotime($valid['start']));
-        $valid['finish'] = date("Y-m-d", strtotime($valid['finish'])) . " 23:59:59";
-        dd($valid);
+        $valid['finish'] = date("Y-m-d", strtotime($valid['finish']));
+        //dd($valid);
         $task = Task::create($valid);
-        return redirect('task')->with('status','Successfully created ' . $task->name);
+        return redirect('tasks')->with('status','Successfully created ' . $task->name);
     }
 
     /**
@@ -115,22 +115,22 @@ class TaskController extends Controller
      */
     public function update($id, Request $request)
     {
-        dd($request);
+        //dd($request);
         $valid = $request->validate([
-        'name' => 'required|max:190',
-        'description' => 'required',
-        'team_id' => 'required',
-        'start' => 'required',
-        'finish' => 'required',
-        'parent' => 'not_in:foo,bar',
-        'sibling' => 'not_in:foo,bar',
+            'name' => 'required|max:50',
+            'description' => 'required',
+            'user_id' => 'required',
+            'start' => 'required',
+            'finish' => 'required',
+            'parent_id' => 'not_in:foo,bar',
+            'priorities_id' => 'not_in:foo,bar',
         ]);
         $valid['start'] = date("Y-m-d", strtotime($valid['start']));
-        $valid['finish'] = date("Y-m-d", strtotime($valid['finish'])) . " 23:59:59";
-        //dd($valid);
+        $valid['finish'] = date("Y-m-d", strtotime($valid['finish']));
+        //dd('update', $valid);
         $task=Task::findOrFail($id);
         $task->update($valid);
-        return redirect('task')->with('status','Successfully updated ' . $task->name);
+        return redirect('tasks')->with('status','Successfully updated ' . $task->name);
     }
 
 //    private $Dels = array();
@@ -159,9 +159,9 @@ class TaskController extends Controller
    */
    public function destroy($id)
    {
-        dd($id);
+        dd('delete Task #',$id);
         $task=Task::findOrFail($id);
-        $this->killKids($id);
+        //$this->killKids($id);
         return redirect('task')->with('status','Successfully deleted ' . implode(', ',$this->Dels));
         //dd($this->Dels);
    }

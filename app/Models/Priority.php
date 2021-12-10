@@ -13,4 +13,7 @@ class Priority extends Model
         'scale'
     ];
 
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
 }
