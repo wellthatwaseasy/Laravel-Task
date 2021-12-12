@@ -1,5 +1,5 @@
 # Laravel-Task
-A tast manager with comments
+A task manager with comments
 
 Laravel with tailwinds
 
