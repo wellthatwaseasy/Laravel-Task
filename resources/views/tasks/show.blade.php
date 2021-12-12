@@ -1,4 +1,4 @@
-{{-- {{ dd($task->childs)}} --}}
+{{-- {{ dd($task->parentOf()) }} --}}
 @extends('layouts.app')
 
 	@section('content')
@@ -18,7 +18,7 @@
                 <a type="button" class="text-green-900 bg-blue-50 p-1 m-2 mb-0 border-4 border-blue-500 rounded-lg "
                 href="{{ url('/tasks') }}"'>Return to Tasks</a>
             @auth
-                <a type="button" class="text-green-900 bg-yellow-50 p-1 m-2 mb-0 border-4 border-yellow-500 rounded-lg "
+                <a type="button" class="text-green-900 bg-blue-50 p-1 m-2 mb-0 border-4 border-blue-500 rounded-lg "
                 href="{{ url('/tasks/'. $task->id . '/edit') }}"'>EDIT the "{{ $task->name }}" task</a>
                 <p>
                     <form action="{{url('/tasks/' . $task->id )}}"

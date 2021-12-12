@@ -31,12 +31,25 @@ class Task extends Model
         return $this->belongsTo(Priority::class);
     }
 
-    public function parent()
-    {
+    public function parent(){
         return $this->belongsTo(Task::class,'parent_id','id');
     }
-    public function childs()
-    {
+    public function childs(){
         return $this->hasMany(Task::class,'parent_id','id');
+    }
+
+    public function isChild(Task $task){
+        return in_array($task->id,$this->childIds());
+    }
+
+    public function childIds(){
+        $childIdsArr=[];
+        $kids = $this->childs;
+        if(!$kids->count()) return $childIdsArr;
+        foreach ($kids as $kid) {
+            $childIdsArr[] = $kid->id;
+            $childIdsArr = array_merge($childIdsArr, $kid->childIds());
+        }
+        return $childIdsArr;
     }
 }

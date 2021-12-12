@@ -36,7 +36,8 @@
             <select name="parent_id" id="parent_id">
                 <option value="0">No Parent</option>
             @foreach($alltasks as $parent)
-                @if($parent->id == $task->id)
+
+                @if($parent->id == $task->id || $task->isChild($parent) )
                     @continue
                 @endif
                 @if($parent->id == $task->parent_id)

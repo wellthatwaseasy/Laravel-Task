@@ -11,7 +11,7 @@
             @endforeach
         @auth
             <div class="flex">
-                    <a class="w-2/12 bg-yellow-200 border-2 border-yellow-700 mt-4 rounded-lg text-center font-bold text-blue-900"
+                    <a class="w-2/12 bg-blue-200 border-2 border-blue-700 mt-4 rounded-lg text-center font-bold text-blue-900"
                     href="{{ url('/tasks/create') }}">Create a New Task</a>
             </div>
         @endauth
