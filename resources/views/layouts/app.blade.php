@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     <title>{{isset($pagetitle)?$pagetitle:'Tasks'}}</title>
 </head>
-<body class="bg-gray-200">
+<body class="bg-{{theme('bg')}}-200">
     @if (session('status'))
         <div>
-            <div class="text-green-900 bg-green-50 p-6 m-2 mb-0 border-4 border-green-500 rounded-lg absolute z-10"
+            <div class="text-{{theme('success')}}-900 bg-{{theme('success')}}-50 p-6 m-2 mb-0 border-4 border-{{theme('success')}}-500 rounded-lg absolute z-10"
                 style="opacity: 0.7;" onclick="parentNode.remove()" id="statusdiv">
                 {{ session('status') }}
             </div>
         </div>
     @endif
-    <nav class="p-3 bg-white flex justify-between mb-6">
+    <nav class="p-3 bg-{{theme('bg')}}-50 flex justify-between mb-6">
         <ul class="flex items-center">
             <li>
                 <a class="p-2" href=" {{ url('/home') }} ">Home</a>

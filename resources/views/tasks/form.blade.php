@@ -2,17 +2,17 @@
         <div class="mb-4">
             <label for="name" class="font-bold">Task Name</label>
             <input type="text" name="name" id="name" placeholder="Task name"
-                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('name') border-red-500 @enderror" value="{{ $task->name }}">
+                class="bg-{{theme('bg')}}-100 border-2 w-full p-4 rounded-lg @error('name') border-{{theme('error')}}-500 @enderror" value="{{ $task->name }}">
             @error('name')
-                <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
+                <div class="text-{{theme('error')}}-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>
         <div class="mb-4">
             <label for="description" class="font-bold">Description</label>
             <input type="text" name="description" id="description" placeholder="description"
-                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('description') border-red-500 @enderror" value="{{ $task->description }}">
+                class="bg-{{theme('bg')}}-100 border-2 w-full p-4 rounded-lg @error('description') border-{{theme('error')}}-500 @enderror" value="{{ $task->description }}">
             @error('description')
-                <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
+                <div class="text-{{theme('error')}}-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>
         <div class="mb-4">
@@ -28,7 +28,7 @@
             @endforeach
             </select>
             @error('user_id')
-                <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
+                <div class="text-{{theme('error')}}-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>
         <div class="mb-4">
@@ -48,23 +48,23 @@
             @endforeach
             </select>
             @error('parent_id')
-                <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
+                <div class="text-{{theme('error')}}-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>
         <div class="mb-4">
             <label for="start" class="font-bold">Start Date</label>
             <input type="text" name="start" id="start" placeholder="start"
-                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('start') border-red-500 @enderror" value="{{ $task->start }}">
+                class="bg-{{theme('bg')}}-100 border-2 w-full p-4 rounded-lg @error('start') border-{{theme('error')}}-500 @enderror" value="{{ $task->start }}">
             @error('start')
-                <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
+                <div class="text-{{theme('error')}}-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>
         <div class="mb-4">
             <label for="finish" class="font-bold">Expect to finish by</label>
             <input type="text" name="finish" id="finish" placeholder="finish"
-                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('finish') border-red-500 @enderror" value="{{ $task->finish }}">
+                class="bg-{{theme('bg')}}-100 border-2 w-full p-4 rounded-lg @error('finish') border-{{theme('error')}}-500 @enderror" value="{{ $task->finish }}">
             @error('finish')
-                <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
+                <div class="text-{{theme('error')}}-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>
         <div class="mb-4">
@@ -80,15 +80,15 @@
             @endforeach
             </select>
             {{-- <input type="text" name="priorities_id" id="priorities_id" placeholder="priorities_id"
-                class="bg-gray-100 border-2 w-full p-4 rounded-lg @error('priorities_id') border-red-500 @enderror" value="{{ $task->priorities_id }}"> --}}
+                class="bg-{{theme('bg')}}-100 border-2 w-full p-4 rounded-lg @error('priorities_id') border-{{theme('error')}}-500 @enderror" value="{{ $task->priorities_id }}"> --}}
             @error('priorities_id')
-                <div class="text-red-500 mt-2 text-sm" > {{ $message}} </div>
+                <div class="text-{{theme('error')}}-500 mt-2 text-sm" > {{ $message}} </div>
             @enderror
         </div>
 
 
         <div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">{{$SubmitButton}} </button>
+            <button type="submit" class="bg-{{theme('bg')}}-500 text-white px-4 py-3 rounded font-medium w-full">{{$SubmitButton}} </button>
         </div>
 {{--
             {{ csrf_field() }}
